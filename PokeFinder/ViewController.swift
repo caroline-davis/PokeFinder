@@ -13,7 +13,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBOutlet weak var mapView: MKMapView!
     
-     let locationManager = CLLocationManager()
+    let locationManager = CLLocationManager()
+    var mapHasCenteredOnce = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,30 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 2000, 2000)
         mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    // if its the first time the user uses the map it is centered otherwise its not because if ur looking for pokemon and panning around the map whilst u walk u dont want the map to recenter back to where u are and miss the pokemon!!!!!!!
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        if let loc = userLocation.location {
+            if !mapHasCenteredOnce {
+                centerMapOnLocation(location: loc)
+                mapHasCenteredOnce = true
+            }
+        }
+    }
+    
+    // if this is a user location annotation we change the annotation to ASH POKEMON MASTER
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        var annotationView: MKAnnotationView?
+        
+        if annotation.isKind(of: MKUserLocation.self) {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "User")
+            annotationView?.image = UIImage(named: "ash")
+            }
+        
+        return annotationView
     }
 
     @IBAction func spotRandomPokemon(_ sender: AnyObject) {
