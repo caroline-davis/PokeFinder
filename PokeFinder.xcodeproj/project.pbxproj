@@ -14,6 +14,7 @@
 		F1635B021F2860650051CD8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1635B011F2860650051CD8C /* Assets.xcassets */; };
 		F1635B051F2860650051CD8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1635B031F2860650051CD8C /* LaunchScreen.storyboard */; };
 		F1635B0D1F28607C0051CD8C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1635B0C1F28607C0051CD8C /* GoogleService-Info.plist */; };
+		F17C76661F29C29600D0334F /* PokeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17C76651F29C29600D0334F /* PokeAnnotation.swift */; };
 		F1DD3BB31F2867A5000114A4 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = F1DD3BAA1F2867A5000114A4 /* GeoFire.m */; };
 		F1DD3BB41F2867A5000114A4 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F1DD3BAC1F2867A5000114A4 /* GFBase32Utils.m */; };
 		F1DD3BB51F2867A5000114A4 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = F1DD3BAE1F2867A5000114A4 /* GFGeoHash.m */; };
@@ -33,6 +34,7 @@
 		F1635B041F2860650051CD8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F1635B061F2860650051CD8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1635B0C1F28607C0051CD8C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F17C76651F29C29600D0334F /* PokeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokeAnnotation.swift; sourceTree = "<group>"; };
 		F1DD3BA31F2867A5000114A4 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
 		F1DD3BA41F2867A5000114A4 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
 		F1DD3BA51F2867A5000114A4 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
@@ -101,17 +103,34 @@
 		F1635AF91F2860650051CD8C /* PokeFinder */ = {
 			isa = PBXGroup;
 			children = (
+				F17C76641F29C20800D0334F /* Model */,
+				F17C76631F29C20200D0334F /* Controller */,
 				F1DD3BA11F2867A5000114A4 /* GeoFire */,
-				F1635B0C1F28607C0051CD8C /* GoogleService-Info.plist */,
 				F1635AFA1F2860650051CD8C /* AppDelegate.swift */,
-				F1635AFC1F2860650051CD8C /* ViewController.swift */,
-				F1635AFE1F2860650051CD8C /* Main.storyboard */,
+				F1DD3BBA1F286B1F000114A4 /* PokeFinder-Bridging-Header.h */,
+				F1635B0C1F28607C0051CD8C /* GoogleService-Info.plist */,
+				F1635B061F2860650051CD8C /* Info.plist */,
 				F1635B011F2860650051CD8C /* Assets.xcassets */,
 				F1635B031F2860650051CD8C /* LaunchScreen.storyboard */,
-				F1635B061F2860650051CD8C /* Info.plist */,
-				F1DD3BBA1F286B1F000114A4 /* PokeFinder-Bridging-Header.h */,
+				F1635AFE1F2860650051CD8C /* Main.storyboard */,
 			);
 			path = PokeFinder;
+			sourceTree = "<group>";
+		};
+		F17C76631F29C20200D0334F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F1635AFC1F2860650051CD8C /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		F17C76641F29C20800D0334F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F17C76651F29C29600D0334F /* PokeAnnotation.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		F1DD3BA11F2867A5000114A4 /* GeoFire */ = {
@@ -278,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1DD3BB41F2867A5000114A4 /* GFBase32Utils.m in Sources */,
+				F17C76661F29C29600D0334F /* PokeAnnotation.swift in Sources */,
 				F1635AFD1F2860650051CD8C /* ViewController.swift in Sources */,
 				F1DD3BB51F2867A5000114A4 /* GFGeoHash.m in Sources */,
 				F1635AFB1F2860650051CD8C /* AppDelegate.swift in Sources */,

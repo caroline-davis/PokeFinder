@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import FirebaseDatabase
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
@@ -15,6 +16,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     let locationManager = CLLocationManager()
     var mapHasCenteredOnce = false
+    var geoFire: GeoFire!
+    var geoFireRef: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +25,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.delegate = self
         // map moves with the users location
         mapView.userTrackingMode = MKUserTrackingMode.follow
+        
+        geoFireRef = Database.database().reference()
+        geoFire = GeoFire(firebaseRef: geoFireRef)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,8 +79,33 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         return annotationView
     }
+    
+    // whenever a pokemon is found this will fire off
+    func createSighting(forLocation location: CLLocation, withPokemon pokeId: Int) {
+        
+        geoFire.setLocation(location, forKey: "\(pokeId)")
+    }
+    
+    // show the pokemon near where the users are
+    func showSightingOnMap(location: CLLocation) {
+        let circleQuery = geoFire!.query(at: location, withRadius: 2.5)
+        
+        // from geofire, whenever it observes a sighting this is fired off
+        _ = circleQuery?.observe(GFEventType.keyEntered, with: { (key, location) in
+            
+            if let key = key, let location = location {
+                let anno = PokeAnnotation(coordinate: location.coordinate, pokemonNumber: Int(key)!)
+                self.mapView.addAnnotation(anno)
+            }
+        })
+    }
 
     @IBAction func spotRandomPokemon(_ sender: AnyObject) {
+        
+        let location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+        let rand = arc4random_uniform(150) + 1
+        
+        createSighting(forLocation: location, withPokemon: Int(rand))
     }
 
 }
